@@ -1,0 +1,86 @@
+<view class="main">
+	<view class="up">
+		<image mode="widthFix" src="../../../images/home.jpg" />
+	</view>
+	<view class="down">
+		<view class="menu shadow-project">
+			<view wx:for="{{newsCateList}}" wx:key="key" bindtap="url" data-url="../../news/index/news_index?id={{item.id}}" class="item">
+				<view class="item-inner">
+					<view class="img shadow-project">
+						<image src="../../../images/home/n{{item.id}}.png" />
+					</view>
+					<view class="title">{{item.title}}</view>
+				</view>
+			</view>
+		</view>
+
+		<!--guide begin -->
+		<view class="guide">
+			<!--<view class="title"> </view>-->
+			<view class="item">
+				<view class="left" bindtap="url" data-url="../../meet/index/meet_index?id=1">
+					<image src="../../../images/home/m1.png" mode="aspectFill" lazy-load="{{true}}" />
+					<view class="line1 text-blue">全程陪诊</view>
+					<view class="line2">就医全程陪护</view>
+					<view class="order shadow">马上预约</view>
+				</view>
+				<view class="right">
+					<view class="line" bindtap="url" data-url="../../meet/index/meet_index?id=2">
+						<image src="../../../images/home/m2.png" mode="aspectFill" lazy-load="{{true}}" />
+						<view class="txt1 text-pink">待办取药</view>
+						<view class="txt2">为您节省时间</view>
+					</view>
+					<view class="line" bindtap="url" data-url="../../meet/index/meet_index?id=3">
+						<image src="../../../images/home/m3.png" mode="aspectFill" lazy-load="{{true}}" />
+						<view class="txt1 text-cyan">住院陪护</view>
+						<view class="txt2">整晚在身边</view>
+					</view>
+				</view>
+			</view>
+		</view>
+		<!--guide END -->
+
+		<view class="vouch-box shadow-project">
+			<view class="title">
+				<view class="mark"></view>
+				<view class="txt">推荐服务</view>
+			</view>
+			<view wx:if="{{!meetList}}" class="margin-top load loading text-l load-project"></view>
+			<view class="meet-list">
+				<view class="item bg-blue light" bind:tap="url" data-url="../../meet/detail/meet_detail?id={{item.meetId}}" wx:for="{{meetList}}" wx:key="k">
+					<image mode="aspectFill" lazy-load="{{true}}" class="loading left  " src="{{item.meetObj.cover[0]}}" />
+					<view class="right">
+						<view class="tt content-cut-one">{{item.meetTitle}}</view>
+						<view class="cnt">{{item.meetDays.length}}天可约</view>
+					</view>
+				</view>
+			</view>
+		</view>
+
+		<view class="vouch-box shadow-project">
+			<view class="title">
+				<view class="mark"></view>
+				<view class="txt">动态</view>
+			</view>
+			<view wx:if="{{!newsList}}" class="margin-top load loading text-l load-project"></view>
+			<view class="list">
+				<view class="item" wx:for="{{newsList}}" wx:key="k" bind:tap="url" data-url="../../news/detail/news_detail?id={{item.newsId}}">
+					<view class="left">
+						<view class="line content-cut-two">{{item.newsTitle}}</view>
+						<view class="bottom">#{{item.newsCateName}} <text class="margin-left-xs">{{item.addTime}}</text></view>
+					</view>
+					<view class="right">
+						<image mode="aspectFill" lazy-load="{{true}}" class="loading" src="{{item.newsObj.cover[0]}}"></image>
+					</view>
+				</view>
+			</view>
+		</view>
+
+	</view>
+	<view style="height: 100rpx;"></view>
+</view>
+
+<block wx:if="{{skin.IS_SUB}}">
+	<import src="../../tpls/menu_tpl.wxml" />
+	<template is="menuTpl" data="{{curMenu:'default_index',returnHome:false}}" />
+</block>

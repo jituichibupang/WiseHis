@@ -1,0 +1,9 @@
+@import "../../../style/skin.wxss"; 
+
+.home {
+	margin-top:30rpx;
+	color:#666;
+	font-size: 30rpx;
+	width: 100%;
+	text-align: center;
+} 

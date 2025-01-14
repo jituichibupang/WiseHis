@@ -1,0 +1,91 @@
+<block wx:if="{{isAdmin&&isLoad}}">
+	<cmpt-comm-list source='admin' type="admin-meet-list" search="{{search||''}}" _menus="{{sortMenus}}" _items="{{sortItems}}" route="admin/meet/list" sortMenusDefaultIndex="0" topBottom="50" placeholder="搜索标题" bind:list="bindCommListCmpt">
+
+		<view slot="searchEnd">
+			<button wx:if="{{admin.type!=2}}" bindtap="url" data-url="../add/admin_meet_add" class="btn radius bg-admin text-white margin-right-s"><text class="icon-roundadd margin-right-xxs"></text>添加新{{MEET_NAME}}</button>
+		</view>
+		<!-- List Begin -->
+		<view class="admin-comm-list">
+			<view wx:if="{{dataList && dataList.total }}" class="load text-grey">共有{{dataList.total}}条符合条件记录</view>
+
+			<view class="item" wx:for="{{dataList.list}}" wx:key="key">
+				<view class="no">{{index+1}}</view>
+				<view class="header">
+					<view class="left text-cut"><text wx:if="{{item.meetOrder==0}}" class="text-black margin-right-xxs" style="font-weight:normal;font-size:24rpx">[置顶]</text><text wx:if="{{item.meetVouch==1}}" class="text-black margin-right-xxs" style="font-weight:normal;font-size:24rpx">[首页推荐]</text> {{item.meetTitle}}
+					</view>
+					<view class="right">
+						<text wx:if="{{item.meetStatus==1}}" class="text-green">「正常」</text>
+						<text wx:elif="{{item.meetStatus==0}}" class="text-orange">「停用」</text>
+					</view>
+				</view>
+
+				<view class="info">
+
+					<view wx:if="{{cateIdOptions.length>1}}" class="info-item">
+						<view class="title">分类</view>
+						<view class="mao">：</view>
+						<view class="content">『{{item.meetCateName}}』</view>
+					</view>
+
+					<view class="info-item">
+						<view class="title">浏览量</view>
+						<view class="mao">：</view>
+						<view class="content">{{item.meetViewCnt}}次</view>
+					</view>
+
+					<view class="info-item">
+						<view class="title">排序号</view>
+						<view class="mao">：</view>
+						<view class="content">{{item.meetOrder}} <text class="margin-left-xxs text-grey">(小的先显示)</text></view>
+					</view>
+
+					<view wx:if="{{admin.type!=2}}" class="info-item" bind:tap="url" data-url="../day_set/admin_meet_day_set?id={{item.meetId}}&idx={{index}}">
+						<view class="title">可预约日期</view>
+						<view class="mao">：</view>
+						<view class="content text-blue">{{item.meetDays.length}}天，去设置更多日期<text class="icon-right"></text></view>
+					</view>
+
+					<view class="info-item">
+						<view class="title">每时段人数上限</view>
+						<view class="mao">：</view>
+						<view class="content"> {{item.meetMaxCnt+'人'}} </view>
+					</view>
+
+					<view class="info-item">
+						<view class="title">创建</view>
+						<view class="mao">：</view>
+						<view class="content">{{item.addTime}}</view>
+					</view>
+
+					<view class="oprt" wx:if="{{admin.type!=2}}">
+						<view bindtap="url" data-url="../edit/admin_meet_edit?id={{item.meetId}}" class="btn round margin-right-s"><text class="icon-edit margin-right-xxs"></text>编辑</view>
+
+						<view bindtap="bindJoinMoreTap" data-id="{{item.meetId}}" data-title="{{item.meetTitle}}" class="btn margin-right-s">名单与核销</view>
+
+						<view bindtap="bindStatusMoreTap" data-id="{{item.meetId}}" class="btn margin-right-s">状态管理</view>
+
+						<view bindtap="bindMoreTap" data-id="{{item.meetId}}" data-idx="{{index}}" data-title="{{item.meetTitle}}" class="btn margin-right-s">更多操作</view>
+
+
+						<view bindtap="url" data-url="../../../meet/detail/meet_detail?id={{item.meetId}}" class="btn margin-right-s">预览</view>
+
+					</view>
+					<view class="oprt" wx:if="{{admin.type==2}}" style="justify-content: center;">
+						<view bindtap="bindScanTap" data-id="{{item.meetId}}" data-title="{{item.meetTitle}}" class="btn " style="width:200rpx"><text class="icon-qrcode margin-right-xs"></text>核销签到</view>
+
+					</view>
+				</view>
+			</view>
+
+		</view>
+		<!-- List END -->
+
+		<!--load begin-->
+		<import src="../../../../../../tpls/public/list_load_tpl.wxml" />
+		<template is="listLoadTpl" data="{{dataList,skin:'text-grey'}}" />
+		<!--load end-->
+
+
+	</cmpt-comm-list>
+
+</block>

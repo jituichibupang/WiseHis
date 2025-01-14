@@ -1,0 +1,98 @@
+<view wx:if="{{!isLoad}}" class="margin-top load loading text-l text-admin"></view>
+
+<view class="main-admin" wx:if="{{isLoad && isAdmin}}">
+
+	<view class="admin-info bg-admin">
+		<view class="pic"><text class="icon-profilefill"></text></view>
+		<view class="right">
+			<view class="name">
+				<text class="text-xl">{{admin.name}}</text>
+
+				<text wx:if="{{admin.type==1}}" class="tag small bg-orange light radius margin-left-s">超级管理员</text>
+				<text wx:if="{{admin.type==0}}" class="tag small bg-green radius margin-left-s">普通管理员</text>
+				<text wx:if="{{admin.type==2}}" class="tag small bg-pink radius margin-left-s">核销员</text>
+
+			</view>
+			<view class="desc text-s">共登录{{admin.cnt}}次，上次{{admin.last}}</view>
+		</view>
+		<view class="exit-admin" bindtap="bindExitTap"><text class="icon-exit"></text></view>
+	</view>
+
+	<view class="comm-list grid col-{{stat.length}}">
+		<view wx:for="{{stat}}" wx:key="key" class="item">{{item.cnt||'0'}}<text class="text-black">{{item.title}}</text></view>
+
+	</view>
+
+
+	<view class="bar bg-white solid-bottom margin-top-s">
+		<view class="action">
+			<text class="icon-title"></text>功能管理
+		</view>
+	</view>
+
+	<view class="comm-list grid col-3">
+		<block wx:if="{{admin.type!=2}}">
+			<view class="item" bindtap="url" data-url="../../user/list/admin_user_list"> <text class="icon-group_fill text-green"></text> <text class="text-black">用户管理</text>
+			</view>
+
+			<view class="item" bindtap="url" data-url="../../news/add/admin_news_add"> <text class="icon-roundadd text-darkgreen"></text> <text class="text-black">添加文章</text>
+			</view>
+
+			<view class="item" bindtap="url" data-url="../../news/list/admin_news_list"> <text class="icon-form text-darkgreen"></text> <text class="text-black">内容管理</text>
+			</view>
+
+			<view class="item" bindtap="url" data-url="../../meet/add/admin_meet_add"> <text class="icon-roundadd text-blue"></text> <text class="text-black">添加预约项目</text>
+			</view>
+
+			<view class="item" bindtap="url" data-url="../../meet/list/admin_meet_list"> <text class="icon-activityfill text-blue"></text> <text class="text-black">预约管理</text>
+			</view>
+		</block>
+		<view class="item" wx:if="{{admin.type==2}}" bindtap="url" data-url="../../meet/list/admin_meet_list"> <text class="icon-activityfill text-blue"></text> <text class="text-black">预约核销管理</text>
+		</view>
+
+
+	</view>
+
+
+	<!-- BOTTOM begin -->
+	<view wx:if="{{admin.type!=2}}" class="comm-list menu  margin-top">
+
+		<view class="item arrow" bindtap="url" data-url="../../setup/about_list/admin_setup_about_list">
+			<view class="content">
+				<text class="icon-edit text-darkgreen"></text>
+				<text class="text-black">编辑 - <text class="text-s">关于我们 | 用户协议</text> </text>
+			</view>
+		</view>
+
+
+
+
+	</view>
+
+	<view class="comm-list menu">
+		<view wx:if="{{admin.type==1}}" class="item arrow" bindtap="url" data-url="../../mgr/list/admin_mgr_list">
+			<view class="content">
+				<text class="icon-profile text-red"></text>
+				<text class="text-black">管理员管理</text>
+			</view>
+		</view>
+
+		<view class="item arrow" bindtap="url" data-url="../../mgr/pwd/admin_mgr_pwd">
+			<view class="content">
+				<text class="icon-lock text-orange"></text>
+				<text class="text-black">修改我的管理员密码</text>
+			</view>
+		</view>
+
+
+
+	</view>
+
+	<!-- BOTTOM END -->
+	<button bindtap="bindExitTap" class="btn-admin margin-top">退出登录</button>
+
+	<view class="foot-bottom">
+		<cmpt-foot />
+	</view>
+
+</view>

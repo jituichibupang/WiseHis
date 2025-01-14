@@ -1,0 +1,31 @@
+<view class="form-box shadow-project card-project">
+	<view class="form-group">
+		<view class="title must">用户名</view>
+		<input placeholder="填写您的用户名" placeholder-class="phc" model:value="{{formAccount}}" maxlength="30"></input>
+	</view>
+	<view wx:if="{{formAccountFocus}}" class="hint-desc error">{{formAccountFocus}}</view>
+
+	<view class="form-group">
+		<view class="title must">姓名</view>
+		<input type="nickname" placeholder="填写您的姓名" placeholder-class="phc" model:value="{{formName}}" maxlength="30"></input>
+	</view>
+	<view wx:if="{{formNameFocus}}" class="hint-desc error">{{formNameFocus}}</view>
+
+	<view class="form-group">
+		<view class="title must">密码</view>
+		<input type="password" placeholder="填写您的密码" placeholder-class="phc" model:value="{{formPassword}}" maxlength="30"></input>
+	</view>
+	<view wx:if="{{formPasswordFocus}}" class="hint-desc error">{{formPasswordFocus}}</view>
+
+	<view class="form-group">
+		<view class="title must">密码确认</view>
+		<input type="password" placeholder="再次填写您的密码" placeholder-class="phc" model:value="{{formPassword2}}" maxlength="30"></input>
+	</view>
+	<view wx:if="{{formPassword2Focus}}" class="hint-desc error">{{formPassword2Focus}}</view>
+
+</view>
+
+<view class="form-box shadow-project card-project margin-top-xs">
+	<cmpt-form-show id="cmpt-form" mark="cmpt-form" isCacheMatch="{{false}}" fields="{{fields}}" forms="{{formForms}}" isDefMatch="{{isEdit?false:true}}">
+	</cmpt-form-show>
+</view>

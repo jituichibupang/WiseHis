@@ -1,0 +1,56 @@
+<view wx:if="{{isLoad===null}}" class="margin-top load notexist text-l load-project"></view>
+<view wx:if="{{isLoad===false}}" class="margin-top load loading text-l load-project"></view>
+
+<block wx:if="{{isLoad}}">
+	<view class="main padding-project">
+		<view class="text-pic-list-box margin-top-xs">
+			<view class="item card-project shadow-project">
+				<view class="title-line">
+					<view class="title content-cut-two">{{meetJoin.meet.meetTitle}} </view>
+				</view>
+
+				<view class="author">
+					<text class="icon-calendar margin-right-xs text-s"></text><text class="text-cut">{{meetJoin.meetJoinDay}} {{meetJoin.meetJoinTime}}</text>
+				</view>
+				<view class="data">
+					<text class="text-green"><text class="icon-check margin-right-xxs"></text>预约成功{{meetJoin.meetJoinIsCheck==1?'，已签到':'，未签到'}}</text>
+				</view>
+
+				<view class="oprt">
+					<view bindtap="url" data-url="../../my/index/my_index" data-type="relaunch" wx:if="{{isShowHome}}" class="btn margin-right-s">返回首页</view>
+					<view bindtap="bindCalendarTap" class="btn">加入手机日程</view>
+				</view>
+
+			</view>
+
+		</view>
+
+		<view class="info-list-box" wx:if="{{meetJoin.meetJoinIsCheck==0}}">
+			<view class="item card-project shadow-project">
+				<view class="info">
+					<view class="center"><text class="text-bold margin-right-s">预约码</text> (向工作人员出示进行核销)</view>
+				</view>
+				<view class="info">
+					<view class="center">
+						<image show-menu-by-longpress="{{true}}" src="{{qrImageData}}" class="loading" />
+					</view>
+				</view>
+			</view>
+		</view>
+
+		<view class="info-list-box margin-bottom-xxl">
+			<view class="item card-project shadow-project">
+				<view class="info margin-bottom-s">
+					<view class="center text-bold">预约人信息</view>
+				</view>
+				<view class="info" wx:for="{{meetJoin.meetJoinForms}}" wx:key="key">
+					<view class="title">{{item.title}}：</view>
+					<view class="content">{{item.val}}</view>
+				</view>
+
+				<view class="info text-grey margin-top-xs text-s">预约时间：{{meetJoin.addTime}}</view>
+				<view wx:if="{{meetJoin.meetJoinIsCheck==1}}" class="info text-grey margin-top-xs text-s">签到时间：{{meetJoin.meetJoinCheckTime}}</view>
+			</view>
+		</view>
+	</view>
+</block>

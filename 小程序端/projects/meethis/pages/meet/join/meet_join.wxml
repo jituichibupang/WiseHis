@@ -1,0 +1,31 @@
+<view wx:if="{{isLoad===null}}" class="margin-top load notexist text-l load-project"></view>
+<view wx:if="{{isLoad===false}}" class="margin-top load loading text-l load-project"></view>
+
+<view wx:if="{{isLoad&&isLogin}}" class="main padding-project">
+
+	<view class="article-box">
+		<view class="form-box card-project shadow-project">
+			<view class="form-group">
+				<view class="title text-cut">{{meet.meetTitle}}</view>
+			</view>
+			<view class="form-group">
+				<view class="title text-cut text-s"><text class="icon-calendar margin-right-xxs"></text>{{day}} {{time}}</view>
+			</view>
+
+		</view>
+
+		<!-- form content begin -->
+		<view class="form-box card-project shadow-project margin-top">
+			<view class="form-group">
+				<view class="line-desc">请您填写资料，带<text class="text-red text-bold">*</text>号为必填项</view>
+			</view>
+			<cmpt-form-show isConfirm="{{true}}" isCacheMatch="{{false}}" id="form-show" mark="meet-form-show" forms="{{meet.myForms}}" fields="{{joinForms}}" bind:submit="bindSubmitCmpt" />
+		</view>
+		<!-- form content end -->
+
+	</view>
+
+	<button bindtap="bindCheckTap" class="btn-base btn-project" style="margin-bottom:100rpx;">提交</button>
+
+
+</view>

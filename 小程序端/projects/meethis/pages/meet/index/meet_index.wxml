@@ -1,0 +1,40 @@
+<view wx:if="{{!isLoad}}" class="margin-top load loading text-l load-project"></view>
+<block wx:else>
+
+	<cmpt-comm-list type="meet-list" _params="{{_params}}" search="{{search||''}}" _menus="{{sortMenus}}" _items="{{sortItems}}" sortMenusDefaultIndex="0" route="meet/list" topBottom="120" isTotalMenu="{{true}}" placeholder="搜索" bind:list="bindCommListCmpt">
+		<view class="list">
+			<view class="item shadow-project" wx:for="{{dataList.list}}" wx:key="key" bindtap="url" data-url="../detail/meet_detail?id={{item.meetId}}">
+				<view class="left">
+					<view class="mark"> </view>
+					<image class="loading" mode="aspectFill" lazy-load="{{true}}" src="{{item.meetObj.cover[0]}}" />
+				</view>
+				<view class="right">
+					<view class="top">
+						<view class="title content-cut-one">{{item.meetTitle}}</view>
+						<view class="tag-list">
+							<text wx:for="{{item.meetObj.tag}}" wx:key="key" wx:for-item="itm">{{itm}}</text>
+						</view>
+					</view>
+					<view class="line">
+						<text class="num"><text class="icon-location text-project"></text>{{item.meetCateName}} </text>
+						<text class="num">{{item.meetDays.length}}天可预约</text>
+					</view>
+				</view>
+			</view>
+
+		</view>
+
+		<!--load begin-->
+		<import src="../../../../../tpls/public/list_load_tpl.wxml" />
+		<template is="listLoadTpl" data="{{skin:'load-project',dataList}}" />
+		<!--load end-->
+
+	</cmpt-comm-list>
+
+	<block wx:if="{{skin.IS_SUB&&curMenu=='meet_index'}}">
+		<import src="../../tpls/menu_tpl.wxml" />
+		<template is="menuTpl" data="{{skin,curMenu ,returnHome}}" />
+	</block>
+
+
+</block>

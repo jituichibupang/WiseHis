@@ -1,0 +1,6 @@
+<include src="../index/news_index.wxml" />
+
+<block wx:if="{{skin.IS_SUB}}">
+	<import src="../../tpls/menu_tpl.wxml" />
+	<template is="menuTpl" data="{{curMenu:'news_index',returnHome:false}}" />
+</block>

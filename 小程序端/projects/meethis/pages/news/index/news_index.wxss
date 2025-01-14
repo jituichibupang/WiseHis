@@ -1,0 +1,73 @@
+@import "../../../style/skin.wxss";
+
+.news-list {
+	width: 100%;
+	padding: 20rpx;
+}
+
+.news-list .item {
+	background-color: #fff;
+	padding: 20rpx 20rpx;
+	margin-bottom: 20rpx;
+	border-radius: 10rpx;
+}
+
+.news-list .title {
+	width: 100%;
+	font-size: 28rpx;
+	font-weight: bold;
+	color: #333;
+	margin-bottom: 4rpx;
+}
+
+.news-list .detail {
+	width: 100%;
+	display: flex;
+}
+
+.news-list .detail .left {
+	margin-right: 20rpx;
+	width: 220rpx;
+	height: 160rpx;
+}
+
+.news-list .detail .left>image {
+	width: inherit;
+	height: inherit;
+	border-radius: 14rpx;
+}
+
+.news-list .detail .right {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.news-list .detail .right .line {
+	font-size: 22rpx;
+	color: #aaa;
+	padding: 2rpx 0;
+}
+
+.news-list .detail .right .bottom {
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+}
+
+.news-list .detail .right .bottom .ll {
+	display: flex;
+	align-items: baseline;
+}
+
+.news-list .detail .right .bottom .rr {
+	display: flex;
+	align-items: baseline;
+}
+
+.news-list .detail .right .bottom .sub {
+	font-size: 22rpx;
+	color: #999;
+	margin-right: 10rpx;
+}

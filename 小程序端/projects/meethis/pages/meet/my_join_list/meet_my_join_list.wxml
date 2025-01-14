@@ -1,0 +1,43 @@
+<block wx:if="{{isLoad}}">
+	<cmpt-comm-list type="my_meet_join" search="{{search||''}}" _menus="{{sortMenus}}" _items="{{sortItems}}" route="meet/my/join/list" isTotalMenu="{{true}}" sortMenusDefaultIndex="0" topBottom="120" placeholder="搜索标题" bind:list="bindCommListCmpt" pulldownType="{{['modal','modal','modal']}}">
+
+		<view slot="searchEnd">
+
+		</view>
+
+		<!-- List Begin -->
+		<view class="text-pic-list-box padding-project">
+
+			<view class="item card-project shadow-project" wx:for="{{dataList.list}}" wx:key="index"> 
+				<view bindtap="url" data-url="../my_join_detail/meet_my_join_detail?id={{item.meetJoinId}}" wx:if="{{item.meetJoinIsCheck==0}}" class="qr"><text class="icon-qrcode"></text></view>
+				<view class="title content-cut-two" bindtap="url" data-url="../detail/meet_detail?id={{item.meetJoinActivityId}}">{{item.meetTitle}}</view>
+				<view class="author">
+					<text class="icon-time margin-right-xs text-s"></text><text class="text-cut">{{item.meetJoinDay}}  {{item.meetJoinTime}}</text>
+				</view>
+
+				<view class="data">
+					<text class="text-green"><text class="icon-check margin-right-xxs"></text>预约成功{{item.meetJoinIsCheck==1?'，已签到':'，未签到'}}</text>
+
+				</view>
+
+				<view class="data data-button">
+					<button bindtap="url" data-url="../my_join_detail/meet_my_join_detail?id={{item.meetJoinId}}" class="btn mid bg-gray text-black">查看详情</button>
+					<button bindtap="bindCancelTap" data-id="{{item.meetJoinId}}" class="btn mid bg-grey light"><text class="icon-close"></text>取消</button>
+				</view>
+
+			</view>
+
+			<!--load begin-->
+			<import src="../../../../../tpls/public/list_load_tpl.wxml" />
+			<template is="listLoadTpl" data="{{skin:'load-project',dataList}}" />
+			<!--load end-->
+
+		</view>
+		<!-- List END -->
+
+	</cmpt-comm-list>
+
+	<!--  button Begin -->
+	<!--  button END -->
+
+</block>

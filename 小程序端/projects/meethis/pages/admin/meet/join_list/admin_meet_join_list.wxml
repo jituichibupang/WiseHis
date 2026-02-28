@@ -1,0 +1,86 @@
+<view wx:if="{{isLoad===null}}" class="margin-top load notexist text-l text-grey"></view>
+<view wx:if="{{isLoad===false}}" class="margin-top load loading text-l text-grey"></view>
+
+<block wx:if="{{isAdmin&&isLoad}}">
+
+	<cmpt-comm-list source='admin' id="cmpt-comm-list" type="admin-meet-join-list" search="{{search||''}}" _params="{{_params}}" _menus="{{sortMenus}}" doDate="{{true}}" _items="{{sortItems}}" route="admin/meet/join/list" topBottom="50" placeholder="搜索" sortMenusDefaultIndex="0" bind:list="bindCommListCmpt">
+
+		<view slot="searchEnd">
+			 
+		</view>
+
+		<!-- List Begin -->
+		<view class="join-list">
+			<view wx:if="{{dataList && dataList.total }}" class="load text-grey">共有{{dataList.total}}条符合条件记录
+				<text wx:if="{{isAllFold}}" bindtap="bindUnFoldAllTap" class="margin-left-xs icon-unfold  text-admin">全部展开</text>
+				<text wx:else bindtap="bindFoldAllTap" class="margin-left-xs icon-fold  text-admin">全部收起</text>
+			</view>
+
+			<view class="item" wx:for="{{dataList.list}}" wx:key="key">
+				<view class="header">
+					<view class="left">
+						<text class="icon-calendar margin-right-xxs"></text><text class="">{{item.addTime}}</text>
+					</view>
+					<view class="right" bindtap="bindCopyTap" data-idx="{{index}}">
+						<text class="icon-copy margin-right-xxs"></text>复制资料
+					</view>
+				</view>
+
+				<view class="info">
+
+					<view class="info-item">
+						<view class="title">时段</view>
+						<view class="mao">：</view>
+						<view class="content">
+							 {{item.meetJoinDay}}  {{item.meetJoinTime}}
+						</view>
+					</view> 
+
+					<view class="info-item">
+						<view class="title">状态</view>
+						<view class="mao">：</view>
+						<view class="content">
+							<view wx:if="{{item.meetJoinStatus==1}}" class="text-green"><text class="icon-roundcheck margin-right-xxs"></text>预约成功
+								<text wx:if="{{item.meetJoinIsCheck==1}}">，已签到 ({{item.meetJoinCheckTime}})</text>
+								<text class="text-grey" wx:else>，未签到</text>
+							</view> 
+						</view>
+					</view> 
+
+					<view class="info-item" wx:for="{{item.meetJoinForms}}" wx:key="key1" wx:for-item="form" wx:for-index="formindex"  >
+						<view class="title">{{form.title}}</view>
+						<view class="mao">：</view>
+						<view wx:if="{{form.type=='mobile'}}" class="content" bindtap="url" data-type="phone" data-url="{{form.val}}">{{form.val}}<text class=" margin-left-xs icon-phone text-black text-normal"></text></view>
+						<view wx:else class="content" bindtap="url" data-type="copy" data-url="{{form.title+'：'+form.val}}">{{form.val}}</view>
+					</view> 
+ 
+
+					<view class="oprt">
+						<block wx:if="{{item.meetJoinStatus==1}}">
+							<view wx:if="{{item.meetJoinIsCheck==0}}" bindtap="bindCheckTap" data-idx="{{index}}" data-flag="1" class="btn bg-purple margin-right-s light">签到核销</view>
+
+							<view wx:else bindtap="bindCheckTap" data-idx="{{index}}" data-flag="0" class="btn bg-grey light margin-right-s">取消签到</view>
+						</block> 
+
+
+						<view bindtap="bindDelTap" data-idx="{{index}}" class="btn bg-orange light margin-right-s">删除</view>
+
+					</view>
+				</view>
+
+				<view class="no">{{index+1}}</view>
+			</view>
+		</view>
+		<!-- List END -->
+
+		<!--load begin-->
+		<import src="../../../../../../tpls/public/list_load_tpl.wxml" />
+		<template is="listLoadTpl" data="{{dataList,skin:'text-grey',noHint:'暂无记录'}}" />
+		<!--load end-->
+
+
+	</cmpt-comm-list>
+
+
+
+</block>

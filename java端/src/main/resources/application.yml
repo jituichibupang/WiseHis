@@ -1,0 +1,59 @@
+# Tomcat
+server:
+  tomcat:
+    uri-encoding: UTF-8
+  port: 8888
+  context-path: /
+  error:
+    whitelabel:
+      enabled: false
+
+spring:
+  jmx:
+    default-domain: project-server
+  # 环境 dev|test|pro
+  profiles:
+    active: dev
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.mysql.cj.jdbc.Driver
+  # jackson时间格式化
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+    default-property-inclusion: always
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+      enabled: true
+  # 指定静态资源的路径
+  mvc:
+    # URL响应地址（Springboot默认为/**)
+    static-path-pattern: /pic/**
+  web:
+    resources:
+      static-locations: classpath:/static/,file:${upload.path}
+
+#服务器地址 不带斜杠结尾
+serverUrl: http://localhost:8888
+
+isDemo: false
+
+# jwt配置
+jwt:
+  # 加密秘钥
+  secret: d4d37ef7e767bf5947980c192938933a
+  # token有效时长 单位秒 7天604800
+  adminExpire: 86400
+  custExpire: 604800
+  workExpire: 604800
+
+
+# 文件上传
+upload:
+  path: c:\file
+  # 文件服务器的图片子目录 （斜杠结尾）
+  server: ${serverUrl}/pic
+
+

@@ -1,0 +1,44 @@
+<view wx:if="{{isLoad===null}}" class="margin-top load notexist text-l load-project"></view>
+<view wx:if="{{isLoad===false}}" class="margin-top load loading text-l load-project"></view>
+
+<view wx:if="{{isLoad}}" class="main padding-project">
+	<view class="form-box shadow-project card-project">
+		<view class="form-group">
+			<view class="title must">用户名</view>
+			<input placeholder="填写您的用户名" placeholder-class="phc" model:value="{{formAccount}}" maxlength="30"></input>
+		</view>
+		<view wx:if="{{formAccountFocus}}" class="hint-desc error">{{formAccountFocus}}</view>
+
+		<view class="form-group">
+			<view class="title must">姓名</view>
+			<input type="nickname" placeholder="填写您的姓名" placeholder-class="phc" model:value="{{formName}}" maxlength="30"></input>
+		</view>
+		<view wx:if="{{formNameFocus}}" class="hint-desc error">{{formNameFocus}}</view>
+
+		<view class="form-group">
+			<view class="title must">密码</view>
+			<input type="password" placeholder="填写您的密码" placeholder-class="phc" model:value="{{formPassword}}" maxlength="30"></input>
+		</view>
+		<view wx:if="{{formPasswordFocus}}" class="hint-desc error">{{formPasswordFocus}}</view>
+
+		<view class="form-group">
+			<view class="title must">密码确认</view>
+			<input type="password" placeholder="再次填写您的密码" placeholder-class="phc" model:value="{{formPassword2}}" maxlength="30"></input>
+		</view>
+		<view wx:if="{{formPassword2Focus}}" class="hint-desc error">{{formPassword2Focus}}</view>
+
+	</view>
+
+	<view class="form-box shadow-project card-project margin-top-xs">
+		<cmpt-form-show id="cmpt-form" mark="cmpt-form" isCacheMatch="{{false}}" fields="{{fields}}" forms="{{formForms}}" isDefMatch="{{isEdit?false:true}}">
+		</cmpt-form-show>
+	</view>
+
+	<view class="pri"><text bind:tap="bindAgreeTap" class="icon-square{{agree?'checkfill':''}} margin-right-xs"></text>
+		<text bind:tap="bindAgreeTap">请阅读并同意</text>
+		《<text bind:tap="url" data-url="../../about/index/about_index?key=SETUP_YS" class="line">用户注册使用协议</text>》
+	</view>
+	<button bindtap="bindSubmitTap" class="btn-base btn-project shadow">提交注册</button>
+
+	<view class="login" bind:tap="url" data-type="relaunch" data-url="../login/my_login">我已有账号，去登录 <text class="icon-right text-gray"></text></view>
+</view>

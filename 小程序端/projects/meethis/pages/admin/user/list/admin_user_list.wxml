@@ -1,0 +1,72 @@
+<block wx:if="{{isAdmin&&isLoad}}">
+	<cmpt-comm-list id="cmpt-comm-list" source='admin' type="admin-user" search="{{search||''}}" _menus="{{sortMenus}}" _items="{{sortItems}}" route="admin/user/list" sortMenusDefaultIndex="0" topBottom="50" placeholder="搜索姓名，账号" bind:list="bindCommListCmpt">
+
+		<view slot="searchEnd">
+			<button bindtap="url" data-url="../export/admin_user_export?condition={{dataList.condition}}" class="btn mid radius bg-admin text-white margin-right-s"><text class="icon-down margin-right-xxs"></text>导出用户资料</button>
+		</view>
+
+		<!-- List Begin -->
+		<view class="admin-comm-list">
+			<view wx:if="{{dataList && dataList.total }}" class="load text-grey">共有{{dataList.total}}条符合条件记录 </view>
+
+			<view class="item" wx:for="{{dataList.list}}" wx:key="key">
+				<view class="no">{{index+1}}</view>
+				<view class="header">
+					<view class="left text-cut">{{item.userName}}
+					</view>
+					<view class="right">
+						<text wx:if="{{item.userStatus==1}}" class="text-green">「正常」</text>
+						<text wx:elif="{{item.userStatus==9}}" class="text-red">「禁用」</text>
+					</view>
+				</view>
+
+				<view class="info">
+					<view class="info-item">
+						<view class="title">账号</view>
+						<view class="mao">：</view>
+						<view class="content">{{item.userAccount}}</view>
+					</view>
+					<view class="info-item">
+						<view class="title">姓名</view>
+						<view class="mao">：</view>
+						<view class="content">{{item.userName}}</view>
+					</view>
+
+					<view class="info-item">
+						<view class="title">注册</view>
+						<view class="mao">：</view>
+						<view class="content">{{item.addTime}}</view>
+					</view>
+
+					<view class="info-item" bindtap="url" data-url="../detail/admin_user_detail?id={{item.userId}}">
+						<view class="title">详情</view>
+						<view class="mao">：</view>
+						<view class="content text-blue">查看更多用户资料...</view>
+					</view>
+
+					<view class="oprt">
+
+						<view bindtap="bindPwdTap" data-id="{{item.userId}}" class="btn  margin-right-s"><text class="icon-edit margin-right-xxs text-green"></text>重置密码</view>
+
+						<view wx:if="{{item.userStatus==9}}" bindtap="bindStatusTap" data-status="1" data-idx="{{index}}" class="btn  margin-right-s"><text class="icon-check margin-right-xxs text-green"></text>恢复正常</view>
+
+						<view wx:if="{{item.userStatus!=9}}" bindtap="bindStatusTap" data-id="{{item.userId}}" data-status="9" data-idx="{{index}}" class="btn  margin-right-s"><text class="icon-close margin-right-xxs text-purple"></text>禁用</view>
+
+						<view bindtap="bindDelTap" data-id="{{item.userId}}" class="btn  margin-right-s"><text class="icon-delete margin-right-xxs text-orange"></text>删除</view>
+
+					</view>
+				</view>
+			</view>
+		</view>
+		<!-- List END -->
+
+		<!--load begin-->
+		<import src="../../../../../../tpls/public/list_load_tpl.wxml" />
+		<template is="listLoadTpl" data="{{skin:'text-grey',dataList}}" />
+		<!--load end-->
+
+
+	</cmpt-comm-list>
+
+
+</block>

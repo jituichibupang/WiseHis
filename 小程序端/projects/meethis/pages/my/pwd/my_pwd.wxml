@@ -1,0 +1,31 @@
+<view wx:if="{{isLoad===null}}" class="margin-top load notexist text-l load-project"></view>
+<view wx:if="{{isLoad===false}}" class="margin-top load loading text-l load-project"></view>
+
+<view wx:if="{{isLoad}}" class="main padding-project">
+	<view class="form-box shadow-project card-project">
+
+		<view class="form-group">
+			<view class="title must">旧密码</view>
+			<input type="password" placeholder="填写您的旧密码" placeholder-class="phc" model:value="{{formOldPassword}}" maxlength="30"></input>
+		</view>
+		<view wx:if="{{formOldPasswordFocus}}" class="hint-desc error">{{formOldPasswordFocus}}</view>
+
+		<view class="form-group">
+			<view class="title must">新密码</view>
+			<input type="password" placeholder="填写您的新密码" placeholder-class="phc" model:value="{{formNewPassword}}" maxlength="30"></input>
+		</view>
+		<view wx:if="{{formNewPasswordFocus}}" class="hint-desc error">{{formNewPasswordFocus}}</view>
+
+		<view class="form-group">
+			<view class="title must">新密码确认</view>
+			<input type="password" placeholder="再次填写您的新密码" placeholder-class="phc" model:value="{{formNewPassword2}}" maxlength="30"></input>
+		</view>
+		<view wx:if="{{formNewPassword2Focus}}" class="hint-desc error">{{formNewPassword2Focus}}</view>
+
+	</view> 
+
+
+	<button bindtap="bindSubmitTap" class="btn-base btn-project shadow">提交修改</button>
+
+
+</view>

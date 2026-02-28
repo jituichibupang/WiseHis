@@ -1,0 +1,27 @@
+<view class="main padding-project">
+	<view class="form-box shadow-project card-project">
+		<view class="form-group">
+			<view class="title must">用户名</view>
+			<input placeholder="填写您的用户名" placeholder-class="phc" model:value="{{formAccount}}" maxlength="30"></input>
+		</view>
+		<view wx:if="{{formAccountFocus}}" class="hint-desc error">{{formAccountFocus}}</view>
+
+		<view class="form-group">
+			<view class="title must">密码</view>
+			<input type="password" placeholder="填写您的密码" placeholder-class="phc" model:value="{{formPassword}}" maxlength="30"></input>
+		</view>
+		<view wx:if="{{formPasswordFocus}}" class="hint-desc error">{{formPasswordFocus}}</view>
+
+
+
+	</view>
+
+
+	<button bindtap="bindSubmitTap" class="btn-base btn-project shadow">马上登录</button>
+
+
+	<view class="home" bind:tap="url" data-type="redirect" data-url="../reg/my_reg">没有账号，现在去注册 <text class="icon-right text-gray"></text></view>
+
+	<view class="home text-project" bind:tap="url" data-type="relaunch" data-url="../../default/index/default_index">返回首页</view>
+
+</view>

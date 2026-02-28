@@ -1,0 +1,16 @@
+@import '../../../../../../style/public/admin.wxss';
+@import '../../../../../../style/project/admin_list_style.wxss';
+
+.data-hint {
+	width: 100%;
+	box-sizing: border-box;
+	line-height: 2.5;
+	background-color: #fff;
+	text-align: center;
+	color: #333;
+	font-size: 36rpx;
+}
+
+.data-hint .text-day {
+	font-size: 30rpx;
+}
